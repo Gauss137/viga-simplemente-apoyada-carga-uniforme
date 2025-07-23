@@ -24,18 +24,24 @@ interface ResultsPanelProps {
   description?: string;
   sections: ResultSection[];
   onExport?: () => void;
+  // Props alternativos para compatibilidad con uso directo
+  results?: Record<string, any>;
 }
 
 export function ResultsPanel({
   title = "Resultados del Análisis",
   description = "Valores calculados según las condiciones especificadas",
-  sections,
+  sections = [],
+  results,
   onExport
 }: ResultsPanelProps) {
+  // Si se pasa 'results' directamente, convertir a formato de secciones
+  const finalSections = sections.length > 0 ? sections : (results ? convertResultsToSections(results) : []);
+
   const formatValue = (value: number | string, precision = 3): string => {
     if (typeof value === 'string') return value;
     if (isNaN(value)) return 'N/A';
-    return value.toFixed(precision);
+    return Number(value).toFixed(precision);
   };
 
   const getTypeStyles = (type: ResultItem['type'] = 'primary') => {
@@ -84,7 +90,7 @@ export function ResultsPanel({
       </CardHeader>
       <CardContent>
         <div className="space-y-6">
-          {sections.map((section, sectionIndex) => (
+          {finalSections.map((section, sectionIndex) => (
             <div key={sectionIndex} className="space-y-3">
               {/* Section Header */}
               <div className="flex items-center gap-2 pb-2 border-b border-gray-100">
@@ -141,7 +147,51 @@ export function ResultsPanel({
   );
 }
 
-// Utility function para crear secciones de resultados comunes
+// Función helper para convertir resultados directos a formato de secciones
+function convertResultsToSections(results: Record<string, any>): ResultSection[] {
+  const sections: ResultSection[] = [];
+  
+  // Crear sección de resultados generales
+  const items: ResultItem[] = [];
+  
+  Object.entries(results).forEach(([key, value]) => {
+    if (typeof value === 'object' && value !== null) {
+      // Manejar objetos anidados
+      Object.entries(value).forEach(([subKey, subValue]) => {
+        items.push({
+          label: `${formatKey(key)} - ${formatKey(subKey)}`,
+          value: subValue as number | string,
+          type: 'primary'
+        });
+      });
+    } else {
+      items.push({
+        label: formatKey(key),
+        value: value as number | string,
+        type: 'primary'
+      });
+    }
+  });
+
+  if (items.length > 0) {
+    sections.push({
+      title: "Resultados del Cálculo",
+      icon: <BarChart3 className="h-4 w-4 text-blue-500" />,
+      items
+    });
+  }
+
+  return sections;
+}
+
+function formatKey(key: string): string {
+  return key
+    .replace(/([A-Z])/g, ' $1')
+    .replace(/^./, str => str.toUpperCase())
+    .trim();
+}
+
+// Utility functions para tipos comunes de resultados
 export const createResultSection = (
   title: string,
   items: Omit<ResultItem, 'type'>[],
@@ -153,7 +203,6 @@ export const createResultSection = (
   items: items.map(item => ({ ...item, type }))
 });
 
-// Utility functions para tipos comunes de resultados
 export const createReactionResults = (reactions: { left: number; right: number }): ResultSection => 
   createResultSection(
     "Reacciones en los Apoyos",
