@@ -266,9 +266,9 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
           <div className="mt-4 flex justify-center">
             <Button 
               onClick={descargarCSV}
-              className="bg-[#f8b133] hover:bg-[#e5a02b] text-white font-medium px-6 py-2 rounded-lg transition-colors duration-200 flex items-center gap-2"
+              className="bg-[#f8b133] text-white px-3 py-1 rounded-full text-xs border border-gray-800 hover:bg-[#e6a030] transition flex items-center gap-2"
             >
-              <Download size={18} />
+              <Download size={14} />
               Descargar resultados (CSV)
             </Button>
           </div>
