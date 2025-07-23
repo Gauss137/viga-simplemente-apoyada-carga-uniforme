@@ -10,9 +10,11 @@ export function BeamDropdown() {
   const [openCategories, setOpenCategories] = useState<string[]>([]);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const toggleCategory = (categoryKey: string, e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const toggleCategory = (categoryKey: string, e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     setOpenCategories(prev => 
       prev.includes(categoryKey) 
         ? prev.filter(key => key !== categoryKey)
@@ -69,59 +71,64 @@ export function BeamDropdown() {
         <div 
           className="absolute top-full left-0 mt-2 w-80 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-96 overflow-hidden"
           onClick={handleDropdownClick}
+          onMouseDown={(e) => e.preventDefault()}
         >
-          <div className="p-3 border-b border-gray-100">
-            <h3 className="font-semibold text-gray-800">Calculadoras de Vigas</h3>
-            <p className="text-xs text-gray-500">
-              43 calculadoras disponibles
-            </p>
-          </div>
+                        <div className="p-3 border-b border-gray-100">
+                <h3 className="font-semibold text-gray-800 text-sm">Calculadoras de Vigas</h3>
+                <p className="text-xs text-gray-500 mt-1">
+                  43 calculadoras disponibles
+                </p>
+              </div>
 
           <div className="max-h-80 overflow-y-auto">
             {Object.entries(BEAM_CATEGORIES).map(([categoryKey, category]) => (
               <div key={categoryKey} className="border-b border-gray-50 last:border-b-0">
                 <button
-                  onClick={(e) => toggleCategory(categoryKey, e)}
-                  className="w-full flex items-center justify-between p-3 hover:bg-gray-50 transition-colors text-left focus:outline-none focus:bg-gray-50"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleCategory(categoryKey);
+                  }}
+                  className="w-full flex items-center justify-between p-2 px-3 hover:bg-gray-50 transition-colors text-left focus:outline-none focus:bg-gray-50"
                 >
-                  <div className="flex items-center">
+                  <div className="flex items-center min-w-0 flex-1">
                     <ChevronRight 
-                      size={16} 
-                      className={`mr-2 transition-transform duration-200 ${
+                      size={14} 
+                      className={`mr-2 transition-transform duration-200 flex-shrink-0 ${
                         openCategories.includes(categoryKey) ? 'rotate-90' : ''
                       }`}
                     />
-                    <span className="text-sm font-medium text-gray-700">
+                    <span className="text-sm font-medium text-gray-700 truncate">
                       {category.title}
                     </span>
                   </div>
-                  <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                  <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full ml-2 flex-shrink-0">
                     {category.count}
                   </span>
                 </button>
 
                 {openCategories.includes(categoryKey) && (
-                  <div className="pl-6 pb-2 bg-gray-25">
+                  <div className="pl-4 pb-1 bg-gray-50/50">
                     {category.calculators.map((calculator) => (
                       <div key={calculator.id} className="mb-1">
                         {calculator.implemented ? (
                           <Link
                             href={calculator.route}
-                            className="flex items-center p-2 text-sm text-gray-600 hover:text-[#f1d475] hover:bg-gray-50 rounded transition-colors"
+                            className="flex items-center p-2 px-3 text-sm text-gray-600 hover:text-[#f1d475] hover:bg-white rounded-sm transition-colors min-w-0"
                             onClick={(e) => {
                               e.stopPropagation();
                               closeDropdown();
                             }}
                           >
-                            <CheckCircle size={14} className="mr-2 text-green-500 flex-shrink-0" />
-                            <span className="flex-1">{calculator.title}</span>
+                            <CheckCircle size={12} className="mr-2 text-green-500 flex-shrink-0" />
+                            <span className="flex-1 truncate">{calculator.title}</span>
                           </Link>
                         ) : (
-                          <div className="flex items-center p-2 text-sm text-gray-400 cursor-not-allowed">
-                            <Circle size={14} className="mr-2 text-gray-300 flex-shrink-0" />
-                            <span className="flex-1">{calculator.title}</span>
-                            <span className="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full whitespace-nowrap">
-                              Próximamente
+                          <div className="flex items-center p-2 px-3 text-sm text-gray-400 cursor-not-allowed min-w-0">
+                            <Circle size={12} className="mr-2 text-gray-300 flex-shrink-0" />
+                            <span className="flex-1 truncate">{calculator.title}</span>
+                            <span className="text-xs text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded text-center ml-2 flex-shrink-0">
+                              Próx.
                             </span>
                           </div>
                         )}
