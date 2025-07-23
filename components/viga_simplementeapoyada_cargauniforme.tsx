@@ -147,7 +147,7 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
     <div className="max-w-3xl mx-auto px-4 md:px-0 space-y-4 md:space-y-8">
       {/* Encabezado principal */}
       <div className="w-full flex justify-center">
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900 border-b-4 border-[#f1d475] w-fit pb-1 text-center">
+        <h1 className="text-3xl font-bold tracking-tight text-gray-900 border-b-4 border-[#f8b133] w-fit pb-1 text-center">
           Calculadora de Viga Simplemente Apoyada con Carga Uniforme
         </h1>
       </div>
@@ -395,8 +395,8 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
               </div>
 
               {/* Nota */}
-              <div className="mt-4 p-3 bg-orange-50 border border-orange-200 rounded">
-                <p className="text-xs text-orange-800">
+              <div className="mt-4 p-3 bg-[#f8b133]/10 border border-[#f8b133]/30 rounded">
+                <p className="text-xs text-[#f8b133]">
                   <strong>Donde:</strong> w = carga uniforme [kN/m], L = longitud [m], x = distancia desde apoyo izquierdo [m], 
                   E = módulo de elasticidad [MPa], I = momento de inercia [mm⁴]
                 </p>
