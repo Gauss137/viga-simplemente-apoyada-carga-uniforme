@@ -300,7 +300,7 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
           <Button 
             onClick={calcular}
             disabled={!hayDatos}
-            className="bg-[#f1d475] text-white px-6 py-2 rounded-full text-sm border border-gray-800 hover:bg-[#e6c760] transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            className="bg-[#f8b133] text-white px-6 py-2 rounded-full text-sm border border-gray-800 hover:bg-[#e6a030] transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
           >
             Calcular resultados
           </Button>
@@ -470,7 +470,7 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
           <div className="mt-3 md:mt-4 flex justify-center">
             <Button 
               onClick={descargarCSV}
-              className="bg-[#f1d475] text-white px-3 py-1 rounded-full text-xs border border-gray-800 hover:bg-[#e6c760] transition flex items-center gap-2"
+              className="bg-[#f8b133] text-white px-3 py-1 rounded-full text-xs border border-gray-800 hover:bg-[#e6a030] transition flex items-center gap-2"
             >
               <Download size={14} />
               Descargar resultados (CSV)
