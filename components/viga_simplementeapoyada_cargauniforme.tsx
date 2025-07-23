@@ -309,18 +309,24 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
               {/* Fuerzas */}
               <div>
                 <h3 className="font-semibold text-gray-700 mb-2">Reacciones y fuerzas cortantes:</h3>
-                <div className="bg-gray-50 p-3 rounded border space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span>Reacción en apoyos:</span>
-                    <BlockMath math="R = \frac{wL}{2}" />
+                <div className="bg-gray-50 p-3 rounded border space-y-3">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+                    <span className="mb-1 md:mb-0">Reacción en apoyos:</span>
+                    <div className="flex justify-center md:justify-end">
+                      <BlockMath math="R = \frac{wL}{2}" />
+                    </div>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span>Cortante máximo:</span>
-                    <BlockMath math="V_{max} = \frac{wL}{2} = R" />
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+                    <span className="mb-1 md:mb-0">Cortante máximo:</span>
+                    <div className="flex justify-center md:justify-end">
+                      <BlockMath math="V_{max} = \frac{wL}{2} = R" />
+                    </div>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span>Cortante en sección x:</span>
-                    <BlockMath math="V_x = w\left(\frac{L}{2} - x\right)" />
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+                    <span className="mb-1 md:mb-0">Cortante en sección x:</span>
+                    <div className="flex justify-center md:justify-end">
+                      <BlockMath math="V_x = w\left(\frac{L}{2} - x\right)" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -328,14 +334,18 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
               {/* Momentos */}
               <div>
                 <h3 className="font-semibold text-gray-700 mb-2">Momentos flectores:</h3>
-                <div className="bg-gray-50 p-3 rounded border space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span>Momento máximo:</span>
-                    <BlockMath math="M_{max} = \frac{wL^2}{8}" />
+                <div className="bg-gray-50 p-3 rounded border space-y-3">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+                    <span className="mb-1 md:mb-0">Momento máximo:</span>
+                    <div className="flex justify-center md:justify-end">
+                      <BlockMath math="M_{max} = \frac{wL^2}{8}" />
+                    </div>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span>Momento en sección x:</span>
-                    <BlockMath math="M_x = \frac{wx(L-x)}{2}" />
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+                    <span className="mb-1 md:mb-0">Momento en sección x:</span>
+                    <div className="flex justify-center md:justify-end">
+                      <BlockMath math="M_x = \frac{wx(L-x)}{2}" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -343,14 +353,18 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
               {/* Deflexiones */}
               <div>
                 <h3 className="font-semibold text-gray-700 mb-2">Deflexiones:</h3>
-                <div className="bg-gray-50 p-3 rounded border space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span>Flecha máxima:</span>
-                    <BlockMath math="\Delta_{max} = \frac{5wL^4}{384EI}" />
+                <div className="bg-gray-50 p-3 rounded border space-y-3">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+                    <span className="mb-1 md:mb-0">Flecha máxima:</span>
+                    <div className="flex justify-center md:justify-end">
+                      <BlockMath math="\Delta_{max} = \frac{5wL^4}{384EI}" />
+                    </div>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span>Flecha en sección x:</span>
-                    <BlockMath math="\Delta_x = \frac{wx^2(L^3-2Lx^2+x^3)}{24EI}" />
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+                    <span className="mb-1 md:mb-0">Flecha en sección x:</span>
+                    <div className="flex justify-center md:justify-end">
+                      <BlockMath math="\Delta_x = \frac{wx^2(L^3-2Lx^2+x^3)}{24EI}" />
+                    </div>
                   </div>
                 </div>
               </div>
