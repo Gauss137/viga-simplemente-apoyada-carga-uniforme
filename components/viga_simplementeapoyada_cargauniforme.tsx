@@ -16,46 +16,81 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
     I: ""
   });
 
-  // Cálculo automático en cada render
-  const x = parseFloat(datos.x);
-  const L = Math.max(parseFloat(datos.L), 0.001);
-  const w = Math.max(parseFloat(datos.w), 0.001);
-  const E = Math.max(parseFloat(datos.E), 0.001);
-  const I = Math.max(parseFloat(datos.I), 0.001);
+  const [resultados, setResultados] = useState({
+    R: "-",
+    Vmax: "-", 
+    Vx: "-",
+    Mmax: "-",
+    Mx: "-",
+    Dmax: "-",
+    Dx: "-"
+  });
+
+  const [calculado, setCalculado] = useState(false);
 
   // Determinar si hay datos válidos
   const hayDatos = [datos.x, datos.L, datos.w, datos.E, datos.I].every(v => v !== "" && !isNaN(Number(v)));
 
-  // Cálculos
-  let R = "-", Vmax = "-", Vx = "-", Mmax = "-", Mx = "-", Dmax = "-", Dx = "-";
-  if (hayDatos) {
+  // Función para ejecutar cálculos
+  const calcular = () => {
+    if (!hayDatos) return;
+
+    const x = parseFloat(datos.x);
+    const L = Math.max(parseFloat(datos.L), 0.001);
+    const w = Math.max(parseFloat(datos.w), 0.001);
+    const E = Math.max(parseFloat(datos.E), 0.001);
+    const I = Math.max(parseFloat(datos.I), 0.001);
+
     // Conversiones correctas para deflexión
     const wN = w * 1000; // kN/m a N/m
     const Em2 = E * 1e6; // MPa a N/m²
     const Im4 = I / 1e12; // mm⁴ a m⁴
 
-    R = ((w * L) / 2).toFixed(1);
-    Vmax = R;
-    Vx = (w * ((L / 2) - x)).toFixed(1);
-    Mmax = ((w * L * L) / 8).toFixed(3);
-    Mx = ((w * x / 2) * (L - x)).toFixed(3);
+    const R_calc = ((w * L) / 2).toFixed(1);
+    const Vmax_calc = R_calc;
+    const Vx_calc = (w * ((L / 2) - x)).toFixed(1);
+    const Mmax_calc = ((w * L * L) / 8).toFixed(3);
+    const Mx_calc = ((w * x / 2) * (L - x)).toFixed(3);
 
     // Deflexión máxima (en mm)
     const Dmax_m = (5 * wN * Math.pow(L, 4)) / (384 * Em2 * Im4);
-    Dmax = isNaN(Dmax_m) ? "-" : (Dmax_m * 1000).toFixed(3);
+    const Dmax_calc = isNaN(Dmax_m) ? "-" : (Dmax_m * 1000).toFixed(3);
 
     // Deflexión en x (en mm)
     const Dx_m = (wN * Math.pow(x, 2) * (Math.pow(L, 3) - 2 * L * Math.pow(x, 2) + Math.pow(x, 3))) / (24 * Em2 * Im4);
-    Dx = isNaN(Dx_m) ? "-" : (Dx_m * 1000).toFixed(3);
-  }
+    const Dx_calc = isNaN(Dx_m) ? "-" : (Dx_m * 1000).toFixed(3);
+
+    setResultados({
+      R: R_calc,
+      Vmax: Vmax_calc,
+      Vx: Vx_calc,
+      Mmax: Mmax_calc,
+      Mx: Mx_calc,
+      Dmax: Dmax_calc,
+      Dx: Dx_calc
+    });
+
+    setCalculado(true);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDatos({ ...datos, [e.target.name]: e.target.value });
+    // Resetear resultados cuando cambien los datos
+    setCalculado(false);
+    setResultados({
+      R: "-",
+      Vmax: "-", 
+      Vx: "-",
+      Mmax: "-",
+      Mx: "-",
+      Dmax: "-",
+      Dx: "-"
+    });
   };
 
   // Función para generar y descargar CSV
   const descargarCSV = () => {
-    if (!hayDatos) return;
+    if (!calculado) return;
 
     const fecha = new Date().toLocaleDateString('es-ES');
     const hora = new Date().toLocaleTimeString('es-ES');
@@ -76,13 +111,13 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
       "",
       "RESULTADOS DEL CÁLCULO",
       "Concepto,Valor,Unidad",
-      `Reacción en apoyos (R),${R},kN`,
-      `Cortante máximo (Vmax),${Vmax},kN`,
-      `Cortante en x (Vx),${Vx},kN`,
-      `Momento máximo (Mmax),${Mmax},kNm`,
-      `Momento en x (Mx),${Mx},kNm`,
-      `Flecha máxima (Δmax),${Dmax},mm`,
-      `Flecha en x (Δx),${Dx},mm`,
+      `Reacción en apoyos (R),${resultados.R},kN`,
+      `Cortante máximo (Vmax),${resultados.Vmax},kN`,
+      `Cortante en x (Vx),${resultados.Vx},kN`,
+      `Momento máximo (Mmax),${resultados.Mmax},kNm`,
+      `Momento en x (Mx),${resultados.Mx},kNm`,
+      `Flecha máxima (Δmax),${resultados.Dmax},mm`,
+      `Flecha en x (Δx),${resultados.Dx},mm`,
       "",
       "NOTA:",
       "Los resultados fueron calculados considerando una viga simplemente apoyada",
@@ -105,7 +140,7 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-4 md:px-0 space-y-10">
+    <div className="max-w-3xl mx-auto px-4 md:px-0 space-y-6 md:space-y-8">
       {/* Encabezado principal */}
       <div className="w-full flex justify-center">
         <h1 className="text-3xl font-bold tracking-tight text-gray-900 border-b-4 border-[#f8b133] w-fit pb-1 text-center">
@@ -231,6 +266,17 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
             />
           </div>
         </div>
+
+        {/* Botón de calcular */}
+        <div className="flex justify-center mt-6">
+          <Button 
+            onClick={calcular}
+            disabled={!hayDatos}
+            className="bg-[#f8b133] text-white px-6 py-2 rounded-full text-sm border border-gray-800 hover:bg-[#e6a030] transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+          >
+            Calcular resultados
+          </Button>
+        </div>
       </div>
 
       {/* Resultados SIEMPRE visibles */}
@@ -244,56 +290,56 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
                      <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
              <div className="flex justify-between items-center">
                <span className="font-semibold text-gray-700 text-sm md:text-base">Reacción en apoyos, R:</span>
-               <span className="font-bold text-gray-800 text-base md:text-lg">{R} <span className="text-sm text-gray-600">kN</span></span>
+               <span className="font-bold text-gray-800 text-base md:text-lg">{resultados.R} <span className="text-sm text-gray-600">kN</span></span>
              </div>
            </div>
 
            <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
              <div className="flex justify-between items-center">
                <span className="font-semibold text-gray-700 text-sm md:text-base">Cortante máximo, Vmax:</span>
-               <span className="font-bold text-gray-800 text-base md:text-lg">{Vmax} <span className="text-sm text-gray-600">kN</span></span>
+               <span className="font-bold text-gray-800 text-base md:text-lg">{resultados.Vmax} <span className="text-sm text-gray-600">kN</span></span>
              </div>
            </div>
 
            <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
              <div className="flex justify-between items-center">
                <span className="font-semibold text-gray-700 text-sm md:text-base">Cortante en x, Vx:</span>
-               <span className="font-bold text-gray-800 text-base md:text-lg">{Vx} <span className="text-sm text-gray-600">kN</span></span>
+               <span className="font-bold text-gray-800 text-base md:text-lg">{resultados.Vx} <span className="text-sm text-gray-600">kN</span></span>
              </div>
            </div>
 
            <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
              <div className="flex justify-between items-center">
                <span className="font-semibold text-gray-700 text-sm md:text-base">Momento máximo, Mmax:</span>
-               <span className="font-bold text-gray-800 text-base md:text-lg">{Mmax} <span className="text-sm text-gray-600">kNm</span></span>
+               <span className="font-bold text-gray-800 text-base md:text-lg">{resultados.Mmax} <span className="text-sm text-gray-600">kNm</span></span>
              </div>
            </div>
 
            <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
              <div className="flex justify-between items-center">
                <span className="font-semibold text-gray-700 text-sm md:text-base">Momento en x, Mx:</span>
-               <span className="font-bold text-gray-800 text-base md:text-lg">{Mx} <span className="text-sm text-gray-600">kNm</span></span>
+               <span className="font-bold text-gray-800 text-base md:text-lg">{resultados.Mx} <span className="text-sm text-gray-600">kNm</span></span>
              </div>
            </div>
 
            <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
              <div className="flex justify-between items-center">
                <span className="font-semibold text-gray-700 text-sm md:text-base">Flecha máxima, Δmax:</span>
-               <span className="font-bold text-gray-800 text-base md:text-lg">{Dmax} <span className="text-sm text-gray-600">mm</span></span>
+               <span className="font-bold text-gray-800 text-base md:text-lg">{resultados.Dmax} <span className="text-sm text-gray-600">mm</span></span>
              </div>
            </div>
 
            <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
              <div className="flex justify-between items-center">
                <span className="font-semibold text-gray-700 text-sm md:text-base">Flecha en x, Δx:</span>
-               <span className="font-bold text-gray-800 text-base md:text-lg">{Dx} <span className="text-sm text-gray-600">mm</span></span>
+               <span className="font-bold text-gray-800 text-base md:text-lg">{resultados.Dx} <span className="text-sm text-gray-600">mm</span></span>
              </div>
            </div>
 
                  </div>
 
         {/* Botón de descarga CSV */}
-        {hayDatos && (
+        {calculado && (
           <div className="mt-4 flex justify-center">
             <Button 
               onClick={descargarCSV}
