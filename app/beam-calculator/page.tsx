@@ -1,5 +1,6 @@
-import { BeamCalculator } from "@/components/BeamCalculator";
+import { redirect } from 'next/navigation';
 
 export default function BeamCalculatorPage() {
-  return <BeamCalculator />;
+  // Redirigir a la calculadora específica implementada
+  redirect('/vigas/simplemente-apoyadas/carga-uniforme');
 } 

@@ -139,12 +139,15 @@ export function MobileMenu() {
                           <div className="mt-1 ml-6 space-y-1">
                             {category.calculators.map((calculator) => (
                               <div key={calculator.id}>
-                                {calculator.implemented ? (
-                                  <Link
-                                    href={calculator.route}
-                                    className="flex items-center p-2 text-xs text-gray-600 hover:text-[#f1d475] hover:bg-gray-50 rounded transition-colors"
-                                    onClick={closeMenu}
-                                  >
+                                                                 {calculator.implemented ? (
+                                   <Link
+                                     href={calculator.route}
+                                     className="flex items-center p-2 text-xs text-gray-600 hover:text-[#f1d475] hover:bg-gray-50 rounded transition-colors"
+                                     onClick={(e) => {
+                                       e.stopPropagation();
+                                       closeMenu();
+                                     }}
+                                   >
                                     <CheckCircle size={12} className="mr-2 text-green-500 flex-shrink-0" />
                                     <span className="flex-1">{calculator.title}</span>
                                   </Link>

@@ -45,6 +45,11 @@ export function BeamDropdown() {
     }
   }, [isOpen]);
 
+  // Prevenir que clics dentro del dropdown lo cierren
+  const handleDropdownClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+
   return (
     <div className="relative" ref={dropdownRef}>
       <button
@@ -61,7 +66,10 @@ export function BeamDropdown() {
       </button>
 
       {isOpen && (
-        <div className="absolute top-full left-0 mt-2 w-80 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-96 overflow-hidden">
+        <div 
+          className="absolute top-full left-0 mt-2 w-80 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-96 overflow-hidden"
+          onClick={handleDropdownClick}
+        >
           <div className="p-3 border-b border-gray-100">
             <h3 className="font-semibold text-gray-800">Calculadoras de Vigas</h3>
             <p className="text-xs text-gray-500">
@@ -100,7 +108,10 @@ export function BeamDropdown() {
                           <Link
                             href={calculator.route}
                             className="flex items-center p-2 text-sm text-gray-600 hover:text-[#f1d475] hover:bg-gray-50 rounded transition-colors"
-                            onClick={closeDropdown}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              closeDropdown();
+                            }}
                           >
                             <CheckCircle size={14} className="mr-2 text-green-500 flex-shrink-0" />
                             <span className="flex-1">{calculator.title}</span>

@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
-import { ROUTES } from '@/lib/constants';
 
 export default function Home() {
-  redirect(ROUTES.BEAM_CALCULATOR);
+  // Redirigir a la primera calculadora específica implementada
+  redirect('/vigas/simplemente-apoyadas/carga-uniforme');
 }

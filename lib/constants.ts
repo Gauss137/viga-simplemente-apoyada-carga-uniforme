@@ -74,8 +74,11 @@ export const EXTERNAL_LINKS = {
 // Rutas de la aplicación
 export const ROUTES = {
   HOME: '/',
-  BEAM_CALCULATOR: '/beam-calculator', // Calculadora actual (será migrada)
+  // Ruta legacy - redirige a la primera calculadora específica
+  BEAM_CALCULATOR: '/beam-calculator',
   STEEL_CALCULATOR: '/steel-calculator',
+  FLEXION: '/flexion',
+  MANUAL: '/manual',
   
   // Nuevas rutas de vigas (se crearán gradualmente)
   BEAMS: {
