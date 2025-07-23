@@ -49,7 +49,13 @@ export function BeamDropdown() {
 
   // Prevenir que clics dentro del dropdown lo cierren
   const handleDropdownClick = (e: React.MouseEvent) => {
+    e.preventDefault();
     e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
+  };
+
+  const handleCategoryClick = (categoryKey: string) => {
+    toggleCategory(categoryKey);
   };
 
   return (
@@ -71,7 +77,8 @@ export function BeamDropdown() {
         <div 
           className="absolute top-full left-0 mt-2 w-80 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-96 overflow-hidden"
           onClick={handleDropdownClick}
-          onMouseDown={(e) => e.preventDefault()}
+          onMouseDown={handleDropdownClick}
+          onMouseUp={handleDropdownClick}
         >
                         <div className="p-3 border-b border-gray-100">
                 <h3 className="font-semibold text-gray-800 text-sm">Calculadoras de Vigas</h3>
@@ -83,52 +90,68 @@ export function BeamDropdown() {
           <div className="max-h-80 overflow-y-auto">
             {Object.entries(BEAM_CATEGORIES).map(([categoryKey, category]) => (
               <div key={categoryKey} className="border-b border-gray-50 last:border-b-0">
-                <button
+                <div
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    toggleCategory(categoryKey);
+                    e.nativeEvent.stopImmediatePropagation();
+                    handleCategoryClick(categoryKey);
                   }}
-                  className="w-full flex items-center justify-between p-2 px-3 hover:bg-gray-50 transition-colors text-left focus:outline-none focus:bg-gray-50"
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }}
+                  className="w-full flex items-center justify-between p-3 hover:bg-gray-50 transition-colors cursor-pointer"
                 >
-                  <div className="flex items-center min-w-0 flex-1">
+                  <div className="flex items-center space-x-2">
                     <ChevronRight 
-                      size={14} 
-                      className={`mr-2 transition-transform duration-200 flex-shrink-0 ${
+                      size={16} 
+                      className={`transition-transform duration-200 ${
                         openCategories.includes(categoryKey) ? 'rotate-90' : ''
                       }`}
                     />
-                    <span className="text-sm font-medium text-gray-700 truncate">
+                    <span className="text-sm font-medium text-gray-700">
                       {category.title}
                     </span>
                   </div>
-                  <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full ml-2 flex-shrink-0">
+                  <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
                     {category.count}
                   </span>
-                </button>
+                </div>
 
                 {openCategories.includes(categoryKey) && (
-                  <div className="pl-4 pb-1 bg-gray-50/50">
+                  <div className="pl-8 pb-2 bg-gray-50">
                     {category.calculators.map((calculator) => (
                       <div key={calculator.id} className="mb-1">
                         {calculator.implemented ? (
                           <Link
                             href={calculator.route}
-                            className="flex items-center p-2 px-3 text-sm text-gray-600 hover:text-[#f1d475] hover:bg-white rounded-sm transition-colors min-w-0"
+                            className="flex items-center justify-between p-2 text-sm text-gray-600 hover:text-[#f1d475] hover:bg-white rounded transition-colors"
                             onClick={(e) => {
                               e.stopPropagation();
                               closeDropdown();
                             }}
                           >
-                            <CheckCircle size={12} className="mr-2 text-green-500 flex-shrink-0" />
-                            <span className="flex-1 truncate">{calculator.title}</span>
+                            <div className="flex items-center space-x-2">
+                              <CheckCircle size={14} className="text-green-500" />
+                              <span>{calculator.title}</span>
+                            </div>
                           </Link>
                         ) : (
-                          <div className="flex items-center p-2 px-3 text-sm text-gray-400 cursor-not-allowed min-w-0">
-                            <Circle size={12} className="mr-2 text-gray-300 flex-shrink-0" />
-                            <span className="flex-1 truncate">{calculator.title}</span>
-                            <span className="text-xs text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded text-center ml-2 flex-shrink-0">
-                              Próx.
+                          <div 
+                            className="flex items-center justify-between p-2 text-sm text-gray-400 cursor-not-allowed"
+                            onMouseDown={(e) => e.preventDefault()}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                            }}
+                          >
+                            <div className="flex items-center space-x-2">
+                              <Circle size={14} className="text-gray-300" />
+                              <span>{calculator.title}</span>
+                            </div>
+                            <span className="text-xs bg-gray-200 px-2 py-1 rounded text-gray-500">
+                              Próximamente
                             </span>
                           </div>
                         )}
