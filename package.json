@@ -1,39 +1,55 @@
 {
-  "name": "viga-simplemente-apoyada-carga-uniforme",
-  "version": "1.0.0",
+  "name": "calculadoras-ingenieria-civil",
+  "version": "2.0.0",
+  "description": "Suite completa de 97 calculadoras especializadas para ingeniería estructural",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "create-calculator": "node scripts/create-calculator.js"
+    "generate:calculator": "node scripts/generate-calculator.js",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
-    "@radix-ui/react-label": "^2.1.7",
-    "@radix-ui/react-select": "^2.2.5",
-    "@radix-ui/react-slot": "^1.2.3",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "katex": "^0.16.22",
-    "lucide-react": "^0.525.0",
     "next": "15.4.1",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-katex": "^3.1.0",
-    "tailwind-merge": "^3.3.1"
+    "react-katex": "^3.0.1",
+    "katex": "^0.16.8",
+    "lucide-react": "^0.453.0",
+    "clsx": "^2.0.0",
+    "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
+    "typescript": "^5",
     "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@types/react-katex": "^3.0.4",
-    "eslint": "^9",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "eslint": "^8",
     "eslint-config-next": "15.4.1",
-    "tailwindcss": "^4",
-    "tw-animate-css": "^1.3.5",
-    "typescript": "^5"
+    "@types/jest": "^29.5.0",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0"
+  },
+  "keywords": [
+    "ingeniería",
+    "estructural", 
+    "vigas",
+    "pórticos",
+    "losas",
+    "acero",
+    "calculadora",
+    "nextjs",
+    "typescript"
+  ],
+  "author": "CSW Ingeniería Civil",
+  "homepage": "https://www.cswingenieriacivil.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gauss137/viga-simplemente-apoyada-carga-uniforme.git"
   }
 }
