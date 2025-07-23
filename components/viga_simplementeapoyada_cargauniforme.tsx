@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
+import { Download } from "lucide-react";
 
 export default function VigaSimplementeApoyadaCargaUniforme() {
   const [datos, setDatos] = useState({
@@ -49,6 +51,57 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDatos({ ...datos, [e.target.name]: e.target.value });
+  };
+
+  // Función para generar y descargar CSV
+  const descargarCSV = () => {
+    if (!hayDatos) return;
+
+    const fecha = new Date().toLocaleDateString('es-ES');
+    const hora = new Date().toLocaleTimeString('es-ES');
+    
+    const csvContent = [
+      "CALCULADORA DE VIGA SIMPLEMENTE APOYADA CON CARGA UNIFORME",
+      "CSW Ingeniería Civil",
+      `Fecha: ${fecha}`,
+      `Hora: ${hora}`,
+      "",
+      "DATOS DE ENTRADA",
+      "Parámetro,Valor,Unidad",
+      `Longitud de la viga (L),${datos.L},m`,
+      `Carga uniforme (w),${datos.w},kN/m`,
+      `Módulo de elasticidad (E),${datos.E},MPa`,
+      `Momento de inercia (I),${datos.I},mm⁴`,
+      `Sección analizada (x),${datos.x},m`,
+      "",
+      "RESULTADOS DEL CÁLCULO",
+      "Concepto,Valor,Unidad",
+      `Reacción en apoyos (R),${R},kN`,
+      `Cortante máximo (Vmax),${Vmax},kN`,
+      `Cortante en x (Vx),${Vx},kN`,
+      `Momento máximo (Mmax),${Mmax},kNm`,
+      `Momento en x (Mx),${Mx},kNm`,
+      `Flecha máxima (Δmax),${Dmax},mm`,
+      `Flecha en x (Δx),${Dx},mm`,
+      "",
+      "NOTA:",
+      "Los resultados fueron calculados considerando una viga simplemente apoyada",
+      "con carga uniforme distribuida. Verificar la aplicabilidad según las",
+      "condiciones reales del proyecto."
+    ].join('\n');
+
+    // Crear y descargar el archivo
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    if (link.download !== undefined) {
+      const url = URL.createObjectURL(blob);
+      link.setAttribute('href', url);
+      link.setAttribute('download', `viga_calculo_${fecha.replace(/\//g, '-')}.csv`);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   };
 
   return (
@@ -157,56 +210,69 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
           
           {/* Cada resultado como una tarjeta */}
-          <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
-            <div className="flex justify-between items-center">
-              <span className="font-semibold text-gray-700 text-sm md:text-base">Reacción en apoyos, R:</span>
-              <span className="font-bold text-blue-600 text-base md:text-lg">{R} <span className="text-sm text-gray-500">kN</span></span>
-            </div>
-          </div>
+                     <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
+             <div className="flex justify-between items-center">
+               <span className="font-semibold text-gray-700 text-sm md:text-base">Reacción en apoyos, R:</span>
+               <span className="font-bold text-gray-800 text-base md:text-lg">{R} <span className="text-sm text-gray-600">kN</span></span>
+             </div>
+           </div>
 
-          <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
-            <div className="flex justify-between items-center">
-              <span className="font-semibold text-gray-700 text-sm md:text-base">Cortante máximo, Vmax:</span>
-              <span className="font-bold text-blue-600 text-base md:text-lg">{Vmax} <span className="text-sm text-gray-500">kN</span></span>
-            </div>
-          </div>
+           <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
+             <div className="flex justify-between items-center">
+               <span className="font-semibold text-gray-700 text-sm md:text-base">Cortante máximo, Vmax:</span>
+               <span className="font-bold text-gray-800 text-base md:text-lg">{Vmax} <span className="text-sm text-gray-600">kN</span></span>
+             </div>
+           </div>
 
-          <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
-            <div className="flex justify-between items-center">
-              <span className="font-semibold text-gray-700 text-sm md:text-base">Cortante en x, Vx:</span>
-              <span className="font-bold text-blue-600 text-base md:text-lg">{Vx} <span className="text-sm text-gray-500">kN</span></span>
-            </div>
-          </div>
+           <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
+             <div className="flex justify-between items-center">
+               <span className="font-semibold text-gray-700 text-sm md:text-base">Cortante en x, Vx:</span>
+               <span className="font-bold text-gray-800 text-base md:text-lg">{Vx} <span className="text-sm text-gray-600">kN</span></span>
+             </div>
+           </div>
 
-          <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
-            <div className="flex justify-between items-center">
-              <span className="font-semibold text-gray-700 text-sm md:text-base">Momento máximo, Mmax:</span>
-              <span className="font-bold text-blue-600 text-base md:text-lg">{Mmax} <span className="text-sm text-gray-500">kNm</span></span>
-            </div>
-          </div>
+           <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
+             <div className="flex justify-between items-center">
+               <span className="font-semibold text-gray-700 text-sm md:text-base">Momento máximo, Mmax:</span>
+               <span className="font-bold text-gray-800 text-base md:text-lg">{Mmax} <span className="text-sm text-gray-600">kNm</span></span>
+             </div>
+           </div>
 
-          <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
-            <div className="flex justify-between items-center">
-              <span className="font-semibold text-gray-700 text-sm md:text-base">Momento en x, Mx:</span>
-              <span className="font-bold text-blue-600 text-base md:text-lg">{Mx} <span className="text-sm text-gray-500">kNm</span></span>
-            </div>
-          </div>
+           <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
+             <div className="flex justify-between items-center">
+               <span className="font-semibold text-gray-700 text-sm md:text-base">Momento en x, Mx:</span>
+               <span className="font-bold text-gray-800 text-base md:text-lg">{Mx} <span className="text-sm text-gray-600">kNm</span></span>
+             </div>
+           </div>
 
-          <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
-            <div className="flex justify-between items-center">
-              <span className="font-semibold text-gray-700 text-sm md:text-base">Flecha máxima, Δmax:</span>
-              <span className="font-bold text-red-600 text-base md:text-lg">{Dmax} <span className="text-sm text-gray-500">mm</span></span>
-            </div>
-          </div>
+           <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
+             <div className="flex justify-between items-center">
+               <span className="font-semibold text-gray-700 text-sm md:text-base">Flecha máxima, Δmax:</span>
+               <span className="font-bold text-gray-800 text-base md:text-lg">{Dmax} <span className="text-sm text-gray-600">mm</span></span>
+             </div>
+           </div>
 
-          <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
-            <div className="flex justify-between items-center">
-              <span className="font-semibold text-gray-700 text-sm md:text-base">Flecha en x, Δx:</span>
-              <span className="font-bold text-red-600 text-base md:text-lg">{Dx} <span className="text-sm text-gray-500">mm</span></span>
-            </div>
-          </div>
+           <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
+             <div className="flex justify-between items-center">
+               <span className="font-semibold text-gray-700 text-sm md:text-base">Flecha en x, Δx:</span>
+               <span className="font-bold text-gray-800 text-base md:text-lg">{Dx} <span className="text-sm text-gray-600">mm</span></span>
+             </div>
+           </div>
 
-        </div>
+                 </div>
+
+        {/* Botón de descarga CSV */}
+        {hayDatos && (
+          <div className="mt-4 flex justify-center">
+            <Button 
+              onClick={descargarCSV}
+              className="bg-[#f8b133] hover:bg-[#e5a02b] text-white font-medium px-6 py-2 rounded-lg transition-colors duration-200 flex items-center gap-2"
+            >
+              <Download size={18} />
+              Descargar resultados (CSV)
+            </Button>
+          </div>
+        )}
       </div>
 
       {/* Aviso legal */}
