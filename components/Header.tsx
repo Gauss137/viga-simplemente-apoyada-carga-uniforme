@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { APP_CONFIG, EXTERNAL_LINKS, ROUTES } from '@/lib/constants';
 import { BeamDropdown } from './BeamDropdown';
+import { MobileMenu } from './MobileMenu';
 
 export function Header() {
   return (
@@ -20,6 +21,7 @@ export function Header() {
           </Link>
         </div>
         
+        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-6 text-sm font-medium">
           <BeamDropdown />
           <Link 
@@ -37,6 +39,9 @@ export function Header() {
             Contacto
           </a>
         </div>
+
+        {/* Mobile Navigation */}
+        <MobileMenu />
       </nav>
     </header>
   );
