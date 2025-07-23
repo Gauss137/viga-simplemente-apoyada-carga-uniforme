@@ -24,7 +24,13 @@ export function Header() {
             href={ROUTES.BEAM_CALCULATOR} 
             className="text-gray-700 hover:text-[#f1d475] transition-colors"
           >
-            Calculadora
+            Vigas
+          </Link>
+          <Link 
+            href={ROUTES.STEEL_CALCULATOR} 
+            className="text-gray-700 hover:text-[#f1d475] transition-colors"
+          >
+            Acero
           </Link>
           <a 
             href={EXTERNAL_LINKS.CONTACT}
