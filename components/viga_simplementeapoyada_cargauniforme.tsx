@@ -479,12 +479,7 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
         )}
       </div>
 
-      {/* Aviso legal */}
-      <div className="mt-12 p-6 rounded-xl bg-gray-100 border border-gray-200 text-sm text-gray-600">
-        <p className="leading-relaxed italic">
-          Las calculadoras de CSW Ingeniería Civil fueron desarrolladas con fines educativos e informativos, y no constituyen asesoramiento técnico profesional. Si bien se basan en criterios, fórmulas y normativas comúnmente aceptadas, parten de supuestos simplificados y pueden no ser aplicables a todos los casos. La información proviene de fuentes técnicas y públicas, pero su exactitud, vigencia o aplicabilidad no está garantizada. El uso de estas herramientas es responsabilidad exclusiva del usuario, quien debe validar los resultados con otras fuentes y consultar a profesionales habilitados antes de tomar decisiones constructivas o económicas. CSW Ingeniería Civil no asume responsabilidad por errores, omisiones ni consecuencias derivadas de su uso.
-        </p>
-      </div>
+
 
       {/* Manual de Variables reemplazado por texto - OCULTO */}
       <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100" style={{ display: 'none' }}>
