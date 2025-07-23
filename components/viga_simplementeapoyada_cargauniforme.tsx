@@ -395,8 +395,8 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
               </div>
 
               {/* Nota */}
-              <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded">
-                <p className="text-xs text-blue-800">
+              <div className="mt-4 p-3 bg-orange-50 border border-orange-200 rounded">
+                <p className="text-xs text-orange-800">
                   <strong>Donde:</strong> w = carga uniforme [kN/m], L = longitud [m], x = distancia desde apoyo izquierdo [m], 
                   E = módulo de elasticidad [MPa], I = momento de inercia [mm⁴]
                 </p>
