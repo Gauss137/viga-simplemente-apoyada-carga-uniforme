@@ -150,51 +150,34 @@ export function BeamCalculator() {
       <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
         <h2 className="text-lg font-bold text-gray-800 mb-4">Resultados del cálculo</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <h3 className="font-semibold text-gray-700 mb-2">Reacciones y Fuerzas:</h3>
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span>Reacción en apoyos (R):</span>
-                <span className="font-mono">{results.R} {DEFAULT_UNITS.FORCE}</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Cortante máximo (Vmax):</span>
-                <span className="font-mono">{results.Vmax} {DEFAULT_UNITS.FORCE}</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Cortante en x (Vx):</span>
-                <span className="font-mono">{results.Vx} {DEFAULT_UNITS.FORCE}</span>
-              </div>
-            </div>
+        <div className="space-y-3">
+          <div className="flex justify-between py-2 border-b border-gray-100">
+            <span>Reacción en apoyos (R):</span>
+            <span className="font-mono font-semibold">{results.R} {DEFAULT_UNITS.FORCE}</span>
           </div>
-          
-          <div>
-            <h3 className="font-semibold text-gray-700 mb-2">Momentos:</h3>
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span>Momento máximo (Mmax):</span>
-                <span className="font-mono">{results.Mmax} {DEFAULT_UNITS.MOMENT}</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Momento en x (Mx):</span>
-                <span className="font-mono">{results.Mx} {DEFAULT_UNITS.MOMENT}</span>
-              </div>
-            </div>
+          <div className="flex justify-between py-2 border-b border-gray-100">
+            <span>Cortante máximo (Vmax):</span>
+            <span className="font-mono font-semibold">{results.Vmax} {DEFAULT_UNITS.FORCE}</span>
           </div>
-          
-          <div>
-            <h3 className="font-semibold text-gray-700 mb-2">Deflexiones:</h3>
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span>Flecha máxima (Δmax):</span>
-                <span className="font-mono">{results.Dmax} {DEFAULT_UNITS.DEFLECTION}</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Flecha en x (Δx):</span>
-                <span className="font-mono">{results.Dx} {DEFAULT_UNITS.DEFLECTION}</span>
-              </div>
-            </div>
+          <div className="flex justify-between py-2 border-b border-gray-100">
+            <span>Cortante en x (Vx):</span>
+            <span className="font-mono font-semibold">{results.Vx} {DEFAULT_UNITS.FORCE}</span>
+          </div>
+          <div className="flex justify-between py-2 border-b border-gray-100">
+            <span>Momento máximo (Mmax):</span>
+            <span className="font-mono font-semibold">{results.Mmax} {DEFAULT_UNITS.MOMENT}</span>
+          </div>
+          <div className="flex justify-between py-2 border-b border-gray-100">
+            <span>Momento en x (Mx):</span>
+            <span className="font-mono font-semibold">{results.Mx} {DEFAULT_UNITS.MOMENT}</span>
+          </div>
+          <div className="flex justify-between py-2 border-b border-gray-100">
+            <span>Flecha máxima (Δmax):</span>
+            <span className="font-mono font-semibold">{results.Dmax} {DEFAULT_UNITS.DEFLECTION}</span>
+          </div>
+          <div className="flex justify-between py-2">
+            <span>Flecha en x (Δx):</span>
+            <span className="font-mono font-semibold">{results.Dx} {DEFAULT_UNITS.DEFLECTION}</span>
           </div>
         </div>
 
@@ -221,7 +204,7 @@ export function BeamCalculator() {
           <div>
             <h3 className="font-semibold text-gray-700 mb-2">Reacciones:</h3>
             <div className="bg-gray-50 p-3 rounded border">
-              <div className="flex justify-center">
+              <div className="text-center">
                 <BlockMath math="R = \frac{wL}{2}" />
               </div>
             </div>
@@ -230,15 +213,15 @@ export function BeamCalculator() {
           <div>
             <h3 className="font-semibold text-gray-700 mb-2">Fuerzas cortantes:</h3>
             <div className="bg-gray-50 p-3 rounded border space-y-3">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                <span className="mb-1 md:mb-0">Cortante máximo:</span>
-                <div className="flex justify-center md:justify-end">
+              <div>
+                <div className="text-center mb-2">
+                  <span className="block text-sm text-gray-600 mb-1">Cortante máximo:</span>
                   <BlockMath math="V_{max} = \frac{wL}{2}" />
                 </div>
               </div>
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                <span className="mb-1 md:mb-0">Cortante en sección x:</span>
-                <div className="flex justify-center md:justify-end">
+              <div>
+                <div className="text-center">
+                  <span className="block text-sm text-gray-600 mb-1">Cortante en sección x:</span>
                   <BlockMath math="V_x = w\left(\frac{L}{2}-x\right)" />
                 </div>
               </div>
@@ -248,15 +231,15 @@ export function BeamCalculator() {
           <div>
             <h3 className="font-semibold text-gray-700 mb-2">Momentos flectores:</h3>
             <div className="bg-gray-50 p-3 rounded border space-y-3">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                <span className="mb-1 md:mb-0">Momento máximo:</span>
-                <div className="flex justify-center md:justify-end">
+              <div>
+                <div className="text-center mb-2">
+                  <span className="block text-sm text-gray-600 mb-1">Momento máximo:</span>
                   <BlockMath math="M_{max} = \frac{wL^2}{8}" />
                 </div>
               </div>
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                <span className="mb-1 md:mb-0">Momento en sección x:</span>
-                <div className="flex justify-center md:justify-end">
+              <div>
+                <div className="text-center">
+                  <span className="block text-sm text-gray-600 mb-1">Momento en sección x:</span>
                   <BlockMath math="M_x = \frac{wx}{2}(L-x)" />
                 </div>
               </div>
@@ -266,27 +249,22 @@ export function BeamCalculator() {
           <div>
             <h3 className="font-semibold text-gray-700 mb-2">Deflexiones:</h3>
             <div className="bg-gray-50 p-3 rounded border space-y-3">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                <span className="mb-1 md:mb-0">Flecha máxima:</span>
-                <div className="flex justify-center md:justify-end">
+              <div>
+                <div className="text-center mb-2">
+                  <span className="block text-sm text-gray-600 mb-1">Flecha máxima:</span>
                   <BlockMath math="\Delta_{max} = \frac{5wL^4}{384EI}" />
                 </div>
               </div>
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                <span className="mb-1 md:mb-0">Flecha en sección x:</span>
-                <div className="flex justify-center md:justify-end">
+              <div>
+                <div className="text-center">
+                  <span className="block text-sm text-gray-600 mb-1">Flecha en sección x:</span>
                   <BlockMath math="\Delta_x = \frac{wx^2(L^3-2Lx^2+x^3)}{24EI}" />
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="mt-4 p-3 bg-[#f8b133]/10 border border-[#f8b133]/30 rounded">
-            <p className="text-xs text-[#f8b133]">
-              <strong>Donde:</strong> w = carga uniforme [{DEFAULT_UNITS.DISTRIBUTED_LOAD}], L = longitud [{DEFAULT_UNITS.LENGTH}], x = distancia desde apoyo izquierdo [{DEFAULT_UNITS.LENGTH}], 
-              E = módulo de elasticidad [{DEFAULT_UNITS.ELASTIC_MODULUS}], I = momento de inercia [{DEFAULT_UNITS.MOMENT_INERTIA}]
-            </p>
-          </div>
+
         </div>
       </ToggleSection>
     </div>
