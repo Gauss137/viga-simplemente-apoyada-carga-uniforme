@@ -12,7 +12,7 @@ import 'katex/dist/katex.min.css';
 import { useBeamCalculator } from '@/hooks/useBeamCalculator';
 import { useModal } from '@/hooks/useModal';
 import { downloadCSV } from '@/lib/csv-export';
-import { DEFAULT_UNITS, APP_CONFIG as config } from '@/lib/constants';
+import { BEAM_DEFAULT_UNITS as DEFAULT_UNITS, BEAM_APP_CONFIG as config } from '@/lib/beam-constants';
 import { BeamInputData } from '@/types';
 
 export function BeamCalculator() {

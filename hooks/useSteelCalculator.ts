@@ -7,7 +7,7 @@ import {
   Table3InputData,
   RebarSpec 
 } from '@/types';
-import { STANDARD_REBAR_DIAMETERS, REBAR_LABELS, VALIDATION_LIMITS } from '@/lib/constants';
+import { STANDARD_REBAR_DIAMETERS, REBAR_LABELS, STEEL_VALIDATION_LIMITS as VALIDATION_LIMITS } from '@/lib/steel-constants';
 
 // Especificaciones de barras estándar
 const REBAR_SPECS: RebarSpec[] = Object.entries(STANDARD_REBAR_DIAMETERS).map(([key, diameter]) => ({

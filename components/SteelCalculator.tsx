@@ -9,7 +9,7 @@ import { RotateCcw } from "lucide-react";
 
 import { useSteelCalculator } from '@/hooks/useSteelCalculator';
 import { useModal } from '@/hooks/useModal';
-import { APP_CONFIG, DEFAULT_UNITS } from '@/lib/constants';
+import { STEEL_APP_CONFIG as APP_CONFIG, STEEL_DEFAULT_UNITS as DEFAULT_UNITS } from '@/lib/steel-constants';
 
 export function SteelCalculator() {
   const {

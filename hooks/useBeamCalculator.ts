@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { BeamInputData, BeamResults, BeamCalculationParams } from '@/types';
-import { VALIDATION_LIMITS } from '@/lib/constants';
+import { BEAM_VALIDATION_LIMITS as VALIDATION_LIMITS } from '@/lib/beam-constants';
 
 export function useBeamCalculator() {
   const [inputData, setInputData] = useState<BeamInputData>({
