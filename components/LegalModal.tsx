@@ -49,7 +49,7 @@ export default function LegalModal({ isOpen, onClose }: LegalModalProps) {
           <div className="mt-6 flex justify-end">
             <button
               onClick={onClose}
-              className="bg-[#f8b133] text-white px-4 py-2 rounded hover:bg-[#e6a030] transition-colors"
+              className="bg-[#f8b133] text-white px-4 py-2 rounded-full border border-gray-800 hover:bg-[#e6a030] transition"
             >
               Entendido
             </button>

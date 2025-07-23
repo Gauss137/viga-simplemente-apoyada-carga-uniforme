@@ -21,8 +21,8 @@ export default function Footer() {
               Todo el contenido de esta página es de acceso libre y gratuito. Si las herramientas, artículos o recursos ofrecidos resultan útiles, es posible colaborar con una pequeña contribución voluntaria a través de los siguientes medios. Estos aportes ayudan a mantener y mejorar el desarrollo de nuevos contenidos abiertos para la comunidad técnica.
             </p>
             <div className="flex justify-center items-center space-x-4 mt-2">
-              <a href="#" className="bg-[#f8b133] text-white px-3 py-1 rounded-full text-xs border border-gray-800 hover:bg-[#e6a030] transition">Botón Cafecito</a>
-              <a href="#" className="bg-[#f8b133] text-white px-3 py-1 rounded-full text-xs border border-gray-800 hover:bg-[#e6a030] transition">Botón PayPal</a>
+              <a href="#" className="bg-[#f8b133] text-white px-3 py-1 rounded-full text-xs border border-gray-800 hover:bg-[#e6a030] transition">Cafecito</a>
+              <a href="#" className="bg-[#f8b133] text-white px-3 py-1 rounded-full text-xs border border-gray-800 hover:bg-[#e6a030] transition">PayPal</a>
             </div>
             
             {/* Aviso Legal discreto */}
