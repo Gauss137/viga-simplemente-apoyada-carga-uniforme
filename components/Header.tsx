@@ -21,9 +21,9 @@ export default function Header() {
         </div>
         {/* Enlaces de navegación */}
         <div className="space-x-4 text-sm font-bold">
-          <Link href="/flexion" className="hover:text-[#f8b133] transition-colors">Calculadora Flexión</Link>
-          <Link href="/viga_simplementeapoyada_cargauniforme" className="hover:text-[#f8b133] transition-colors">Viga Simplemente Apoyada</Link>
-          <a href="https://www.cswingenieriacivil.com/contacto" target="_blank" rel="noopener noreferrer" className="hover:text-[#f8b133] transition-colors">
+          <Link href="/flexion" className="hover:text-[#f1d475] transition-colors">Calculadora Flexión</Link>
+          <Link href="/viga_simplementeapoyada_cargauniforme" className="hover:text-[#f1d475] transition-colors">Viga Simplemente Apoyada</Link>
+          <a href="https://www.cswingenieriacivil.com/contacto" target="_blank" rel="noopener noreferrer" className="hover:text-[#f1d475] transition-colors">
             Contacto
           </a>
         </div>
