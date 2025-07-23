@@ -9,7 +9,7 @@ export function Header() {
         <div className="flex items-center">
           <Link href={ROUTES.HOME} className="flex items-center">
             <Image
-              src="/csw-logo.png"
+              src="/PRORecurso 4tij.png"
               alt={APP_CONFIG.COMPANY}
               width={150}
               height={60}
