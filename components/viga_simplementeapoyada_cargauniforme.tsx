@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -119,14 +119,60 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
       {/* Esquema gráfico */}
       <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
         <h2 className="text-lg font-bold text-gray-800 mb-4">Esquema</h2>
-        <div className="w-full flex justify-center items-center h-60 md:h-80 border border-gray-200 rounded bg-white text-gray-500">
-          <Image
-            src="/esquema.svg"
-            alt="Esquema de la viga simplemente apoyada con carga uniforme"
-            width={800}
-            height={300}
-            style={{ objectFit: "contain", maxWidth: "100%", maxHeight: "100%" }}
-          />
+        <div className="w-full flex justify-center items-center h-60 md:h-80 border border-gray-200 rounded bg-white text-gray-500 relative">
+          <div 
+            className="relative select-none"
+            style={{
+              userSelect: 'none',
+              WebkitUserSelect: 'none',
+              MozUserSelect: 'none',
+              msUserSelect: 'none',
+              WebkitTouchCallout: 'none',
+              WebkitUserDrag: 'none',
+              KhtmlUserDrag: 'none',
+              MozUserDrag: 'none'
+            } as React.CSSProperties}
+            onContextMenu={(e) => e.preventDefault()}
+            onDragStart={(e) => e.preventDefault()}
+          >
+            <Image
+              src="/esquema.svg"
+              alt="Esquema de la viga simplemente apoyada con carga uniforme"
+              width={800}
+              height={300}
+              style={{ 
+                objectFit: "contain", 
+                maxWidth: "100%", 
+                maxHeight: "100%",
+                pointerEvents: 'none',
+                userSelect: 'none'
+              } as React.CSSProperties}
+              draggable={false}
+              onDragStart={(e) => e.preventDefault()}
+              onContextMenu={(e) => e.preventDefault()}
+            />
+            {/* Overlay invisible para prevenir selección */}
+            <div 
+              className="absolute inset-0 z-10"
+              style={{ 
+                background: 'transparent',
+                cursor: 'default'
+              }}
+              onContextMenu={(e) => e.preventDefault()}
+              onDragStart={(e) => e.preventDefault()}
+            />
+            {/* Marca de agua sutil */}
+            <div 
+              className="absolute bottom-2 right-2 text-xs text-gray-400 opacity-50 pointer-events-none select-none"
+              style={{
+                userSelect: 'none',
+                WebkitUserSelect: 'none',
+                fontSize: '10px'
+              }}
+            >
+              © CSW Ingeniería Civil
+            </div>
+          </div>
         </div>
       </div>
 
