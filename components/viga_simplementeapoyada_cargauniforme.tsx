@@ -9,11 +9,11 @@ import { Download } from "lucide-react";
 
 export default function VigaSimplementeApoyadaCargaUniforme() {
   const [datos, setDatos] = useState({
-    x: "0.5",
-    L: "1",
-    w: "1",
-    E: "200000",
-    I: "180000"
+    x: "",
+    L: "",
+    w: "",
+    E: "",
+    I: ""
   });
 
   // Cálculo automático en cada render
