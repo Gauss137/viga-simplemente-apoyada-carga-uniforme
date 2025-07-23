@@ -18,7 +18,7 @@ export default function VariablesManual() {
           <li><span className="font-medium not-italic text-gray-700">As-nec</span> = Sección de acero necesaria en la cara a tracción de la losa, en [cm²/m]</li>
           <li><span className="font-medium not-italic text-gray-700">As-max</span> = máximo acero admisible en la losa antes de necesitar acero a compresión, en [cm²/m]</li>
           <li><span className="font-medium not-italic text-gray-700">As-min</span> = acero mínimo requerido en la cara de tracción de la losa, en [cm²/m]</li>
-          <li><span className="font-medium not-italic text-gray-700">As'</span> = Acero a compresión en la zona comprimida de la losa, si se requiriera. [cm²/m]</li>
+          <li><span className="font-medium not-italic text-gray-700">As&apos;</span> = Acero a compresión en la zona comprimida de la losa, si se requiriera. [cm²/m]</li>
         </ul>
       </div>
     </div>

@@ -2,10 +2,8 @@
 
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
-import VariablesManual from "@/components/VariablesManual";
 
 export default function VigaSimplementeApoyadaCargaUniforme() {
   const [datos, setDatos] = useState({
@@ -13,20 +11,18 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
     L: "1",
     w: "1",
     E: "200000",
-    I: "180000",
-    multVal: "1"
+    I: "180000"
   });
 
   // Cálculo automático en cada render
-  let x = parseFloat(datos.x);
-  let L = Math.max(parseFloat(datos.L), 0.001);
-  let w = Math.max(parseFloat(datos.w), 0.001);
-  let E = Math.max(parseFloat(datos.E), 0.001);
-  let I = Math.max(parseFloat(datos.I), 0.001);
-  let multVal = parseFloat(datos.multVal);
+  const x = parseFloat(datos.x);
+  const L = Math.max(parseFloat(datos.L), 0.001);
+  const w = Math.max(parseFloat(datos.w), 0.001);
+  const E = Math.max(parseFloat(datos.E), 0.001);
+  const I = Math.max(parseFloat(datos.I), 0.001);
 
   // Determinar si hay datos válidos
-  const hayDatos = [datos.x, datos.L, datos.w, datos.E, datos.I, datos.multVal].every(v => v !== "" && !isNaN(Number(v)));
+  const hayDatos = [datos.x, datos.L, datos.w, datos.E, datos.I].every(v => v !== "" && !isNaN(Number(v)));
 
   // Cálculos
   let R = "-", Vmax = "-", Vx = "-", Mmax = "-", Mx = "-", Dmax = "-", Dx = "-";
