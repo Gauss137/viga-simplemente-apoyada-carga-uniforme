@@ -5,7 +5,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
-import { Download } from "lucide-react";
+import { Download, ChevronDown, ChevronUp } from "lucide-react";
+import 'katex/dist/katex.min.css';
+import { InlineMath, BlockMath } from 'react-katex';
 
 export default function VigaSimplementeApoyadaCargaUniforme() {
   const [datos, setDatos] = useState({
@@ -27,6 +29,7 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
   });
 
   const [calculado, setCalculado] = useState(false);
+  const [mostrarFormulas, setMostrarFormulas] = useState(false);
 
   // Determinar si hay datos válidos
   const hayDatos = [datos.x, datos.L, datos.w, datos.E, datos.I].every(v => v !== "" && !isNaN(Number(v)));
@@ -140,7 +143,7 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-4 md:px-0 space-y-6 md:space-y-8">
+    <div className="max-w-3xl mx-auto px-4 md:px-0 space-y-4 md:space-y-8">
       {/* Encabezado principal */}
       <div className="w-full flex justify-center">
         <h1 className="text-3xl font-bold tracking-tight text-gray-900 border-b-4 border-[#f8b133] w-fit pb-1 text-center">
@@ -152,7 +155,7 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
       </p>
 
       {/* Esquema gráfico */}
-      <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+      <div className="bg-white p-4 md:p-6 rounded-lg shadow-sm border border-gray-100">
         <h2 className="text-lg font-bold text-gray-800 mb-4">Esquema</h2>
         <div className="w-full flex justify-center items-center h-60 md:h-80 border border-gray-200 rounded bg-white text-gray-500 relative overflow-hidden">
           <div 
@@ -197,9 +200,9 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
       </div>
 
       {/* Bloque de Inputs */}
-      <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-        <h2 className="text-lg font-bold text-gray-800 mb-6">Datos de cálculo</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="bg-white p-4 md:p-6 rounded-lg shadow-sm border border-gray-100">
+        <h2 className="text-lg font-bold text-gray-800 mb-4 md:mb-6">Datos de cálculo</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
           <div>
             <Label className="text-sm text-gray-700 font-medium">Longitud de la viga L [m]</Label>
             <Input 
@@ -268,7 +271,7 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
         </div>
 
         {/* Botón de calcular */}
-        <div className="flex justify-center mt-6">
+        <div className="flex justify-center mt-4 md:mt-6">
           <Button 
             onClick={calcular}
             disabled={!hayDatos}
@@ -279,68 +282,153 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
         </div>
       </div>
 
+      {/* Fórmulas utilizadas */}
+      <div className="bg-white rounded-lg shadow-sm border border-gray-100">
+        {/* Header con botón toggle */}
+        <button
+          onClick={() => setMostrarFormulas(!mostrarFormulas)}
+          className="w-full p-4 md:p-6 flex items-center justify-between hover:bg-gray-50 transition-colors duration-200 rounded-lg"
+        >
+          <h2 className="text-lg font-bold text-gray-800">Fórmulas utilizadas</h2>
+          <div className="flex items-center text-gray-600">
+            <span className="text-sm mr-2">
+              {mostrarFormulas ? 'Ocultar' : 'Mostrar'}
+            </span>
+            {mostrarFormulas ? (
+              <ChevronUp size={20} />
+            ) : (
+              <ChevronDown size={20} />
+            )}
+          </div>
+        </button>
+        
+        {/* Contenido colapsible */}
+        {mostrarFormulas && (
+          <div className="px-4 pb-4 md:px-6 md:pb-6 border-t border-gray-100">
+            <div className="space-y-4 text-sm pt-4">
+              {/* Fuerzas */}
+              <div>
+                <h3 className="font-semibold text-gray-700 mb-2">Reacciones y fuerzas cortantes:</h3>
+                <div className="bg-gray-50 p-3 rounded border space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span>Reacción en apoyos:</span>
+                    <BlockMath math="R = \frac{wL}{2}" />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>Cortante máximo:</span>
+                    <BlockMath math="V_{max} = \frac{wL}{2} = R" />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>Cortante en sección x:</span>
+                    <BlockMath math="V_x = w\left(\frac{L}{2} - x\right)" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Momentos */}
+              <div>
+                <h3 className="font-semibold text-gray-700 mb-2">Momentos flectores:</h3>
+                <div className="bg-gray-50 p-3 rounded border space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span>Momento máximo:</span>
+                    <BlockMath math="M_{max} = \frac{wL^2}{8}" />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>Momento en sección x:</span>
+                    <BlockMath math="M_x = \frac{wx(L-x)}{2}" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Deflexiones */}
+              <div>
+                <h3 className="font-semibold text-gray-700 mb-2">Deflexiones:</h3>
+                <div className="bg-gray-50 p-3 rounded border space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span>Flecha máxima:</span>
+                    <BlockMath math="\Delta_{max} = \frac{5wL^4}{384EI}" />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>Flecha en sección x:</span>
+                    <BlockMath math="\Delta_x = \frac{wx^2(L^3-2Lx^2+x^3)}{24EI}" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Nota */}
+              <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded">
+                <p className="text-xs text-blue-800">
+                  <strong>Donde:</strong> w = carga uniforme [kN/m], L = longitud [m], x = distancia desde apoyo izquierdo [m], 
+                  E = módulo de elasticidad [MPa], I = momento de inercia [mm⁴]
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
       {/* Resultados SIEMPRE visibles */}
       <div className="bg-white p-4 md:p-6 rounded-lg shadow-sm border border-gray-100">
-        <h2 className="text-lg font-bold text-gray-800 mb-4">Resultados del cálculo</h2>
+        <h2 className="text-lg font-bold text-gray-800 mb-3 md:mb-4">Resultados del cálculo</h2>
         
-        {/* Diseño responsive: grid en desktop, stack en móvil */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                {/* Diseño responsive: grid en desktop, stack en móvil */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
           
           {/* Cada resultado como una tarjeta */}
-                     <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
-             <div className="flex justify-between items-center">
-               <span className="font-semibold text-gray-700 text-sm md:text-base">Reacción en apoyos, R:</span>
-               <span className="font-bold text-gray-800 text-base md:text-lg">{resultados.R} <span className="text-sm text-gray-600">kN</span></span>
-             </div>
-           </div>
+          <div className="bg-gray-50 border border-gray-200 rounded-md p-2 md:p-4">
+            <div className="flex justify-between items-center">
+              <span className="font-semibold text-gray-700 text-sm md:text-base">Reacción en apoyos, R:</span>
+              <span className="font-bold text-gray-800 text-base md:text-lg">{resultados.R} <span className="text-sm text-gray-600">kN</span></span>
+            </div>
+          </div>
 
-           <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
-             <div className="flex justify-between items-center">
-               <span className="font-semibold text-gray-700 text-sm md:text-base">Cortante máximo, Vmax:</span>
-               <span className="font-bold text-gray-800 text-base md:text-lg">{resultados.Vmax} <span className="text-sm text-gray-600">kN</span></span>
-             </div>
-           </div>
+          <div className="bg-gray-50 border border-gray-200 rounded-md p-2 md:p-4">
+            <div className="flex justify-between items-center">
+              <span className="font-semibold text-gray-700 text-sm md:text-base">Cortante máximo, Vmax:</span>
+              <span className="font-bold text-gray-800 text-base md:text-lg">{resultados.Vmax} <span className="text-sm text-gray-600">kN</span></span>
+            </div>
+          </div>
 
-           <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
-             <div className="flex justify-between items-center">
-               <span className="font-semibold text-gray-700 text-sm md:text-base">Cortante en x, Vx:</span>
-               <span className="font-bold text-gray-800 text-base md:text-lg">{resultados.Vx} <span className="text-sm text-gray-600">kN</span></span>
-             </div>
-           </div>
+          <div className="bg-gray-50 border border-gray-200 rounded-md p-2 md:p-4">
+            <div className="flex justify-between items-center">
+              <span className="font-semibold text-gray-700 text-sm md:text-base">Cortante en x, Vx:</span>
+              <span className="font-bold text-gray-800 text-base md:text-lg">{resultados.Vx} <span className="text-sm text-gray-600">kN</span></span>
+            </div>
+          </div>
 
-           <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
-             <div className="flex justify-between items-center">
-               <span className="font-semibold text-gray-700 text-sm md:text-base">Momento máximo, Mmax:</span>
-               <span className="font-bold text-gray-800 text-base md:text-lg">{resultados.Mmax} <span className="text-sm text-gray-600">kNm</span></span>
-             </div>
-           </div>
+          <div className="bg-gray-50 border border-gray-200 rounded-md p-2 md:p-4">
+            <div className="flex justify-between items-center">
+              <span className="font-semibold text-gray-700 text-sm md:text-base">Momento máximo, Mmax:</span>
+              <span className="font-bold text-gray-800 text-base md:text-lg">{resultados.Mmax} <span className="text-sm text-gray-600">kNm</span></span>
+            </div>
+          </div>
 
-           <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
-             <div className="flex justify-between items-center">
-               <span className="font-semibold text-gray-700 text-sm md:text-base">Momento en x, Mx:</span>
-               <span className="font-bold text-gray-800 text-base md:text-lg">{resultados.Mx} <span className="text-sm text-gray-600">kNm</span></span>
-             </div>
-           </div>
+          <div className="bg-gray-50 border border-gray-200 rounded-md p-2 md:p-4">
+            <div className="flex justify-between items-center">
+              <span className="font-semibold text-gray-700 text-sm md:text-base">Momento en x, Mx:</span>
+              <span className="font-bold text-gray-800 text-base md:text-lg">{resultados.Mx} <span className="text-sm text-gray-600">kNm</span></span>
+            </div>
+          </div>
 
-           <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
-             <div className="flex justify-between items-center">
-               <span className="font-semibold text-gray-700 text-sm md:text-base">Flecha máxima, Δmax:</span>
-               <span className="font-bold text-gray-800 text-base md:text-lg">{resultados.Dmax} <span className="text-sm text-gray-600">mm</span></span>
-             </div>
-           </div>
+          <div className="bg-gray-50 border border-gray-200 rounded-md p-2 md:p-4">
+            <div className="flex justify-between items-center">
+              <span className="font-semibold text-gray-700 text-sm md:text-base">Flecha máxima, Δmax:</span>
+              <span className="font-bold text-gray-800 text-base md:text-lg">{resultados.Dmax} <span className="text-sm text-gray-600">mm</span></span>
+            </div>
+          </div>
 
-           <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
-             <div className="flex justify-between items-center">
-               <span className="font-semibold text-gray-700 text-sm md:text-base">Flecha en x, Δx:</span>
-               <span className="font-bold text-gray-800 text-base md:text-lg">{resultados.Dx} <span className="text-sm text-gray-600">mm</span></span>
-             </div>
-           </div>
+          <div className="bg-gray-50 border border-gray-200 rounded-md p-2 md:p-4">
+            <div className="flex justify-between items-center">
+              <span className="font-semibold text-gray-700 text-sm md:text-base">Flecha en x, Δx:</span>
+              <span className="font-bold text-gray-800 text-base md:text-lg">{resultados.Dx} <span className="text-sm text-gray-600">mm</span></span>
+            </div>
+          </div>
 
                  </div>
 
         {/* Botón de descarga CSV */}
         {calculado && (
-          <div className="mt-4 flex justify-center">
+          <div className="mt-3 md:mt-4 flex justify-center">
             <Button 
               onClick={descargarCSV}
               className="bg-[#f8b133] text-white px-3 py-1 rounded-full text-xs border border-gray-800 hover:bg-[#e6a030] transition flex items-center gap-2"
