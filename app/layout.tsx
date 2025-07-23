@@ -12,8 +12,8 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: 'Flexión Losa App',
-  description: 'Calculadora de acero a flexión para losas de concreto reforzado'
+  title: 'Calculadora Viga Simplemente Apoyada',
+  description: 'Calculadora de viga simplemente apoyada con carga uniforme'
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
