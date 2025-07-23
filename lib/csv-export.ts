@@ -1,5 +1,5 @@
 import { BeamInputData, BeamResults } from '@/types';
-import { CSV_CONFIG, DEFAULT_UNITS } from './constants';
+import { BEAM_CSV_CONFIG as CSV_CONFIG, BEAM_DEFAULT_UNITS as DEFAULT_UNITS } from './beam-constants';
 
 export function generateCSVContent(inputData: BeamInputData, results: BeamResults): string {
   const fecha = new Date().toLocaleDateString('es-ES');
