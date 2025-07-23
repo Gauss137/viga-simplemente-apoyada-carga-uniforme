@@ -1,19 +1,8 @@
-# Configuración de Fuente Dosis
+# Configuración de Fuente Poppins
 
-## 📁 Estructura de Archivos
+## 🎨 Configuración Tipográfica
 
-Coloca los siguientes archivos TTF en el directorio `public/fonts/`:
-
-```
-public/fonts/
-├── Dosis-Bold.ttf
-├── Dosis-SemiBold.ttf
-├── Dosis-ExtraBold.ttf
-├── Dosis-ExtraLight.ttf
-├── Dosis-Light.ttf
-├── Dosis-Medium.ttf
-└── Dosis-Regular.ttf
-```
+Este proyecto utiliza **Poppins** de Google Fonts, una fuente moderna y legible perfecta para aplicaciones web profesionales.
 
 ## 🎨 Jerarquías Tipográficas Implementadas
 
@@ -42,12 +31,12 @@ public/fonts/
 ## 🔧 Configuración Técnica
 
 ### CSS Global (`app/globals.css`)
-- Declaraciones `@font-face` para todas las variantes
 - Configuración de `font-display: swap` para mejor performance
-- Variables CSS para la familia de fuentes
+- Variables CSS para la familia de fuentes Poppins
+- Utilidades personalizadas para todos los pesos
 
 ### Componentes Actualizados
-- **FlexionForm**: Jerarquías optimizadas para cada elemento
+- **Calculadoras**: Jerarquías optimizadas para cada elemento
 - **Header**: Navegación con peso semibold
 - **Footer**: Texto con pesos light y medium
 
@@ -58,12 +47,14 @@ public/fonts/
 3. **Consistencia**: Uso uniforme en toda la aplicación
 4. **Accesibilidad**: Contraste y legibilidad mejorados
 5. **Responsive**: Funciona perfectamente en todos los dispositivos
+6. **Google Fonts**: Carga optimizada y amplia compatibilidad
 
 ## 📱 Uso en Tailwind CSS
 
 Las clases de fuente están disponibles automáticamente:
 
 ```css
+.font-thin        /* 100 */
 .font-extralight  /* 200 */
 .font-light       /* 300 */
 .font-normal      /* 400 */
@@ -71,20 +62,22 @@ Las clases de fuente están disponibles automáticamente:
 .font-semibold    /* 600 */
 .font-bold        /* 700 */
 .font-extrabold   /* 800 */
+.font-black       /* 900 */
 ```
 
 ## ✅ Verificación
 
-Después de agregar los archivos TTF:
+Para verificar la implementación:
 
 1. Ejecuta `npm run build` - debe compilar sin errores
 2. Ejecuta `npm run dev` - la aplicación debe cargar correctamente
 3. Verifica que las fuentes se carguen en el navegador (DevTools > Network)
+4. Inspecciona los elementos para confirmar que Poppins se esté aplicando
 
 ## 🎯 Resultado Final
 
 Una interfaz moderna y profesional con:
-- Tipografía Dosis completamente implementada
+- Tipografía Poppins completamente implementada
 - Jerarquías visuales claras y consistentes
 - Performance optimizada
 - Diseño responsive y accesible 

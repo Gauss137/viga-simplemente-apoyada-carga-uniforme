@@ -1,36 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏗️ Calculadora de Viga Simplemente Apoyada con Carga Uniforme
 
-## Getting Started
+Aplicación web desarrollada por **CSW Ingeniería Civil** para el cálculo de vigas simplemente apoyadas con carga uniforme distribuida.
 
-First, run the development server:
+## 📋 Descripción
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Esta calculadora permite calcular:
+- ⚖️ **Reacciones** en los apoyos
+- ✂️ **Fuerzas cortantes** (máxima y en cualquier sección)
+- 🔄 **Momentos flectores** (máximo y en cualquier sección)  
+- 📏 **Deflexiones** (máxima y en cualquier sección)
+
+## 🚀 Características
+
+- ✅ **Interfaz intuitiva** y responsive
+- ✅ **Cálculos en tiempo real**
+- ✅ **Esquema gráfico** de la viga
+- ✅ **Fórmulas matemáticas** con notación LaTeX
+- ✅ **Exportación de resultados** en formato CSV
+- ✅ **Diseño profesional** con identidad visual de CSW
+
+## 🛠️ Tecnologías Utilizadas
+
+- **Framework**: Next.js 15.4.1
+- **Lenguaje**: TypeScript
+- **Estilos**: Tailwind CSS
+- **Fuentes**: Poppins (Google Fonts)
+- **Íconos**: Lucide React
+- **Matemáticas**: KaTeX para renderizado de fórmulas
+- **Despliegue**: Vercel
+
+## 🧮 Fórmulas Implementadas
+
+### Reacciones en los Apoyos
+```
+R = wL/2
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Cortante Máximo
+```
+Vmax = wL/2
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Cortante en Sección x
+```
+Vx = w(L/2 - x)
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Momento Máximo
+```
+Mmax = wL²/8
+```
 
-## Learn More
+### Momento en Sección x
+```
+Mx = (wx/2)(L - x)
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Deflexión Máxima
+```
+Δmax = 5wL⁴/(384EI)
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Deflexión en Sección x
+```
+Δx = wx²(L³ - 2Lx² + x³)/(24EI)
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🔧 Instalación y Desarrollo
 
-## Deploy on Vercel
+```bash
+# Clonar el repositorio
+git clone [URL_DEL_REPOSITORIO]
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Instalar dependencias
+npm install
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Ejecutar en modo desarrollo
+npm run dev
+
+# Construir para producción
+npm run build
+
+# Iniciar servidor de producción
+npm start
+```
+
+## 📱 Uso
+
+1. **Ingresa los datos** de la viga:
+   - Longitud (L) en metros
+   - Carga uniforme (w) en kN/m
+   - Módulo de elasticidad (E) en MPa
+   - Momento de inercia (I) en mm⁴
+   - Sección de análisis (x) en metros
+
+2. **Haz clic en "Calcular"** para obtener los resultados
+
+3. **Descarga los resultados** en formato CSV si lo necesitas
+
+## ⚖️ Aviso Legal
+
+Las calculadoras fueron desarrolladas con fines educativos e informativos, y no constituyen asesoramiento técnico profesional. Si bien se basan en criterios, fórmulas y normativas comúnmente aceptadas, parten de supuestos simplificados y pueden no ser aplicables a todos los casos.
+
+**CSW Ingeniería Civil** no asume responsabilidad por errores, omisiones ni consecuencias derivadas de su uso.
+
+## 📞 Contacto
+
+- **Web**: [cswingenieriacivil.com](https://www.cswingenieriacivil.com)
+- **LinkedIn**: [CSW Ingeniería Civil](https://www.linkedin.com/company/cswingenieriacivil/)
+- **Instagram**: [@csw_ingenieriacivil](https://www.instagram.com/csw_ingenieriacivil/)
+
+---
+
+**Desarrollado con ❤️ por CSW Ingeniería Civil** - Haciendo la ingeniería accesible para todos.
