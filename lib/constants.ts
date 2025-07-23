@@ -74,8 +74,13 @@ export const EXTERNAL_LINKS = {
 // Rutas de la aplicación
 export const ROUTES = {
   HOME: '/',
-  BEAM_CALCULATOR: '/beam-calculator',
+  BEAM_CALCULATOR: '/beam-calculator', // Calculadora actual (será migrada)
   STEEL_CALCULATOR: '/steel-calculator',
+  
+  // Nuevas rutas de vigas (se crearán gradualmente)
+  BEAMS: {
+    SIMPLY_SUPPORTED_UDL: '/vigas/simplemente-apoyadas/carga-uniforme'
+  }
 } as const;
 
 // Configuración CSV export

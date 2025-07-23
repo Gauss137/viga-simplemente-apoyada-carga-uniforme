@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { APP_CONFIG, EXTERNAL_LINKS, ROUTES } from '@/lib/constants';
+import { BeamDropdown } from './BeamDropdown';
 
 export function Header() {
   return (
@@ -20,12 +21,7 @@ export function Header() {
         </div>
         
         <div className="hidden md:flex items-center space-x-6 text-sm font-medium">
-          <Link 
-            href={ROUTES.BEAM_CALCULATOR} 
-            className="text-gray-700 hover:text-[#f1d475] transition-colors"
-          >
-            Vigas
-          </Link>
+          <BeamDropdown />
           <Link 
             href={ROUTES.STEEL_CALCULATOR} 
             className="text-gray-700 hover:text-[#f1d475] transition-colors"
