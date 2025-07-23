@@ -4,17 +4,7 @@
   "rsc": true,
   "tsx": true,
   "tailwind": {
-    "theme": "light",
-    "darkMode": "class",
-    "baseColor": "neutral",
-    "cssVariables": true,
-    "prefix": "",
-    "theme": "light",
-    "darkMode": "class",
-    "baseColor": "neutral",
-    "cssVariables": true,
-    "prefix": "",
-    "config": "",
+    "config": "tailwind.config.ts",
     "css": "app/globals.css",
     "baseColor": "neutral",
     "cssVariables": true,
@@ -25,7 +15,8 @@
     "utils": "@/lib/utils",
     "ui": "@/components/ui",
     "lib": "@/lib",
-    "hooks": "@/hooks"
+    "hooks": "@/hooks",
+    "types": "@/types"
   },
   "iconLibrary": "lucide"
 }

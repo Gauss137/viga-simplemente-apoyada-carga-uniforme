@@ -1,14 +1,10 @@
 "use client";
 
-import { useState } from 'react';
 import { X } from 'lucide-react';
+import { ModalProps } from '@/types';
+import { APP_CONFIG } from '@/lib/constants';
 
-interface LegalModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-export default function LegalModal({ isOpen, onClose }: LegalModalProps) {
+export function LegalModal({ isOpen, onClose }: ModalProps) {
   if (!isOpen) return null;
 
   return (
@@ -41,7 +37,7 @@ export default function LegalModal({ isOpen, onClose }: LegalModalProps) {
             </p>
             
             <p>
-              <strong>CSW Ingeniería Civil</strong> no asume responsabilidad por errores, omisiones ni 
+              <strong>{APP_CONFIG.COMPANY}</strong> no asume responsabilidad por errores, omisiones ni 
               consecuencias derivadas de su uso.
             </p>
           </div>
@@ -58,13 +54,4 @@ export default function LegalModal({ isOpen, onClose }: LegalModalProps) {
       </div>
     </div>
   );
-}
-
-export function useLegalModal() {
-  const [isOpen, setIsOpen] = useState(false);
-  
-  const openModal = () => setIsOpen(true);
-  const closeModal = () => setIsOpen(false);
-  
-  return { isOpen, openModal, closeModal };
 } 
