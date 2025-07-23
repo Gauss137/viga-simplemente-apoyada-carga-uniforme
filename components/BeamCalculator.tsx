@@ -47,7 +47,7 @@ export function BeamCalculator() {
         onToggle={toggleDiagram} 
         title="Esquema"
       >
-        <div className="w-full flex justify-center items-center h-60 md:h-80 bg-gray-50 text-gray-500 relative overflow-hidden rounded-lg">
+        <div className="w-full flex justify-center items-center h-60 md:h-80 bg-white text-gray-500 relative overflow-hidden rounded-lg border border-gray-200">
           <div className="relative w-full h-full flex justify-center items-center select-none">
             <Image
               src="/esquema.svg"
