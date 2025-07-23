@@ -150,20 +150,62 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
       </div>
 
       {/* Resultados SIEMPRE visibles */}
-      <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+      <div className="bg-white p-4 md:p-6 rounded-lg shadow-sm border border-gray-100">
         <h2 className="text-lg font-bold text-gray-800 mb-4">Resultados del cálculo</h2>
-        <div className="bg-white border border-gray-200 rounded-md p-4">
-          <table className="w-full text-sm text-gray-800">
-            <tbody>
-              <tr><td className="font-semibold">Reacción en apoyos, R:</td><td className="text-right">{R}</td><td className="pl-2">kN</td></tr>
-              <tr><td className="font-semibold">Cortante máximo, Vmax:</td><td className="text-right">{Vmax}</td><td className="pl-2">kN</td></tr>
-              <tr><td className="font-semibold">Cortante en x, Vx:</td><td className="text-right">{Vx}</td><td className="pl-2">kN</td></tr>
-              <tr><td className="font-semibold">Momento máximo, Mmax:</td><td className="text-right">{Mmax}</td><td className="pl-2">kNm</td></tr>
-              <tr><td className="font-semibold">Momento en x, Mx:</td><td className="text-right">{Mx}</td><td className="pl-2">kNm</td></tr>
-              <tr><td className="font-semibold">Flecha máxima, Δmax:</td><td className="text-right">{Dmax}</td><td className="pl-2">mm</td></tr>
-              <tr><td className="font-semibold">Flecha en x, Δx:</td><td className="text-right">{Dx}</td><td className="pl-2">mm</td></tr>
-            </tbody>
-          </table>
+        
+        {/* Diseño responsive: grid en desktop, stack en móvil */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+          
+          {/* Cada resultado como una tarjeta */}
+          <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
+            <div className="flex justify-between items-center">
+              <span className="font-semibold text-gray-700 text-sm md:text-base">Reacción en apoyos, R:</span>
+              <span className="font-bold text-blue-600 text-base md:text-lg">{R} <span className="text-sm text-gray-500">kN</span></span>
+            </div>
+          </div>
+
+          <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
+            <div className="flex justify-between items-center">
+              <span className="font-semibold text-gray-700 text-sm md:text-base">Cortante máximo, Vmax:</span>
+              <span className="font-bold text-blue-600 text-base md:text-lg">{Vmax} <span className="text-sm text-gray-500">kN</span></span>
+            </div>
+          </div>
+
+          <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
+            <div className="flex justify-between items-center">
+              <span className="font-semibold text-gray-700 text-sm md:text-base">Cortante en x, Vx:</span>
+              <span className="font-bold text-blue-600 text-base md:text-lg">{Vx} <span className="text-sm text-gray-500">kN</span></span>
+            </div>
+          </div>
+
+          <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
+            <div className="flex justify-between items-center">
+              <span className="font-semibold text-gray-700 text-sm md:text-base">Momento máximo, Mmax:</span>
+              <span className="font-bold text-blue-600 text-base md:text-lg">{Mmax} <span className="text-sm text-gray-500">kNm</span></span>
+            </div>
+          </div>
+
+          <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
+            <div className="flex justify-between items-center">
+              <span className="font-semibold text-gray-700 text-sm md:text-base">Momento en x, Mx:</span>
+              <span className="font-bold text-blue-600 text-base md:text-lg">{Mx} <span className="text-sm text-gray-500">kNm</span></span>
+            </div>
+          </div>
+
+          <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
+            <div className="flex justify-between items-center">
+              <span className="font-semibold text-gray-700 text-sm md:text-base">Flecha máxima, Δmax:</span>
+              <span className="font-bold text-red-600 text-base md:text-lg">{Dmax} <span className="text-sm text-gray-500">mm</span></span>
+            </div>
+          </div>
+
+          <div className="bg-gray-50 border border-gray-200 rounded-md p-3 md:p-4">
+            <div className="flex justify-between items-center">
+              <span className="font-semibold text-gray-700 text-sm md:text-base">Flecha en x, Δx:</span>
+              <span className="font-bold text-red-600 text-base md:text-lg">{Dx} <span className="text-sm text-gray-500">mm</span></span>
+            </div>
+          </div>
+
         </div>
       </div>
 
