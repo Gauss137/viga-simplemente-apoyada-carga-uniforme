@@ -190,7 +190,7 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
               type="number"
               step="0.1"
               min="0"
-              placeholder="Ej: 5.0"
+              placeholder="Ej: 1.0"
             />
           </div>
           <div>
@@ -203,7 +203,7 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
               type="number"
               step="0.1"
               min="0"
-              placeholder="Ej: 5.0"
+              placeholder="Ej: 1.0"
             />
           </div>
           <div>
