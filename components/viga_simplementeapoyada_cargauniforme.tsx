@@ -30,6 +30,7 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
 
   const [calculado, setCalculado] = useState(false);
   const [mostrarFormulas, setMostrarFormulas] = useState(false);
+  const [mostrarEsquema, setMostrarEsquema] = useState(true);
 
   // Determinar si hay datos válidos
   const hayDatos = [datos.x, datos.L, datos.w, datos.E, datos.I].every(v => v !== "" && !isNaN(Number(v)));
@@ -155,48 +156,72 @@ export default function VigaSimplementeApoyadaCargaUniforme() {
       </p>
 
       {/* Esquema gráfico */}
-      <div className="bg-white p-4 md:p-6 rounded-lg shadow-sm border border-gray-100">
-        <h2 className="text-lg font-bold text-gray-800 mb-4">Esquema</h2>
-        <div className="w-full flex justify-center items-center h-60 md:h-80 border border-gray-200 rounded bg-white text-gray-500 relative overflow-hidden">
-          <div 
-            className="relative w-full h-full flex justify-center items-center select-none"
-            onContextMenu={(e) => e.preventDefault()}
-            onDragStart={(e) => e.preventDefault()}
-          >
-            <Image
-              src="/esquema.svg"
-              alt="Esquema de la viga simplemente apoyada con carga uniforme"
-              width={800}
-              height={300}
-              style={{ 
-                objectFit: "contain", 
-                maxWidth: "100%", 
-                maxHeight: "100%",
-                userSelect: 'none'
-              }}
-              draggable={false}
-              onDragStart={(e) => e.preventDefault()}
-              onContextMenu={(e) => e.preventDefault()}
-            />
-            {/* Overlay invisible para prevenir selección */}
-            <div 
-              className="absolute inset-0"
-              style={{ 
-                background: 'transparent',
-                cursor: 'default'
-              }}
-              onContextMenu={(e) => e.preventDefault()}
-              onDragStart={(e) => e.preventDefault()}
-            />
-            {/* Marca de agua sutil */}
-            <div 
-              className="absolute bottom-2 right-2 text-xs text-gray-400 opacity-50 pointer-events-none select-none"
-              style={{ fontSize: '10px' }}
-            >
-              © CSW Ingeniería Civil
+      <div className="bg-white rounded-lg shadow-sm border border-gray-100">
+        {/* Header con botón toggle */}
+        <button
+          onClick={() => setMostrarEsquema(!mostrarEsquema)}
+          className="w-full p-4 md:p-6 flex items-center justify-between hover:bg-gray-50 transition-colors duration-200 rounded-lg"
+        >
+          <h2 className="text-lg font-bold text-gray-800">Esquema</h2>
+          <div className="flex items-center text-gray-600">
+            <span className="text-sm mr-2">
+              {mostrarEsquema ? 'Ocultar' : 'Mostrar'}
+            </span>
+            {mostrarEsquema ? (
+              <ChevronUp size={20} />
+            ) : (
+              <ChevronDown size={20} />
+            )}
+          </div>
+        </button>
+        
+        {/* Contenido colapsible */}
+        {mostrarEsquema && (
+          <div className="px-4 pb-4 md:px-6 md:pb-6 border-t border-gray-100">
+            <div className="pt-4">
+              <div className="w-full flex justify-center items-center h-60 md:h-80 bg-gray-50 text-gray-500 relative overflow-hidden rounded-lg">
+                <div 
+                  className="relative w-full h-full flex justify-center items-center select-none"
+                  onContextMenu={(e) => e.preventDefault()}
+                  onDragStart={(e) => e.preventDefault()}
+                >
+                  <Image
+                    src="/esquema.svg"
+                    alt="Esquema de la viga simplemente apoyada con carga uniforme"
+                    width={800}
+                    height={300}
+                    style={{ 
+                      objectFit: "contain", 
+                      maxWidth: "100%", 
+                      maxHeight: "100%",
+                      userSelect: 'none'
+                    }}
+                    draggable={false}
+                    onDragStart={(e) => e.preventDefault()}
+                    onContextMenu={(e) => e.preventDefault()}
+                  />
+                  {/* Overlay invisible para prevenir selección */}
+                  <div 
+                    className="absolute inset-0"
+                    style={{ 
+                      background: 'transparent',
+                      cursor: 'default'
+                    }}
+                    onContextMenu={(e) => e.preventDefault()}
+                    onDragStart={(e) => e.preventDefault()}
+                  />
+                  {/* Marca de agua sutil */}
+                  <div 
+                    className="absolute bottom-2 right-2 text-xs text-gray-400 opacity-50 pointer-events-none select-none"
+                    style={{ fontSize: '10px' }}
+                  >
+                    © CSW Ingeniería Civil
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Bloque de Inputs */}
